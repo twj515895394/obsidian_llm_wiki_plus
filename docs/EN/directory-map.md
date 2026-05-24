@@ -14,7 +14,7 @@ Content directories are localized. Tool directories remain stable in English so 
 | `30_研究/` | `30_Research/` | Deep research, topic studies, and analysis reports |
 | `35_问答沉淀/` | `35_QA_Library/` | High-value AI Q&A and reusable conversation results |
 | `40_知识库/` | `40_Knowledge_Base/` | Structured wiki pages, entities, concepts, claims, workflows, and more |
-| `50_资源/` | `50_Resources/` | Tools, links, materials, cases, and references |
+| `50_资源/` | `50_Resources/` | Tools, links, cases, prompt templates, and lightweight reference resources |
 | `60_原始资料/` | `60_Raw_Sources/` | Raw sources, assets, snapshots, and imports |
 | `70_内容创作/` | `70_Content_Creation/` | X posts, newsletters, Rednote posts, video scripts, topics, and assets |
 | `80_决策中心/` | `80_Decision_Center/` | Technical selections, architecture decisions, product judgments, content strategies, and more |
@@ -22,6 +22,8 @@ Content directories are localized. Tool directories remain stable in English so 
 | `99_系统/` | `99_System/` | System rules, templates, logs, and lifecycle management |
 
 ## `40_Knowledge_Base` Map
+
+`40_Knowledge_Base` is the main layer where the llm_wiki idea is applied. It stores structured, reusable, maintainable wiki pages.
 
 | CN | EN | Description |
 |---|---|---|
@@ -33,7 +35,23 @@ Content directories are localized. Tool directories remain stable in English so 
 | `综合分析/` | `synthesis/` | Synthesis across multiple sources |
 | `对比分析/` | `comparisons/` | Comparisons between objects or approaches |
 
+## `50_Resources` Map
+
+`50_Resources` is a resource-list layer. It does not carry the core llm_wiki knowledge types such as entities, concepts, claims, and comparisons. Those belong in `40_Knowledge_Base/`.
+
+| CN | EN | Description |
+|---|---|---|
+| `工具/` | `tools/` | Tool lists, tool entry points, installation notes, common commands, and lightweight evaluations |
+| `链接/` | `links/` | Useful links, navigation entries, and lightweight references |
+| `案例/` | `cases/` | Reference cases, good projects, content examples, and practical samples |
+| `提示词模板/` | `prompt-templates/` | Reusable prompts, agent instruction snippets, writing templates, and task input formats |
+| `原始资源/` | `raw-resources/` | Lightweight article, paper, or resource leads that are not formally archived yet |
+| `原始资源/文章/` | `raw-resources/articles/` | Lightweight article entries or article lists |
+| `原始资源/论文/` | `raw-resources/papers/` | Lightweight paper entries or paper lists |
+
 ## `60_Raw_Sources` Map
+
+`60_Raw_Sources` is the evidence and source archive layer. Any material that will support research, wiki pages, or decision records should be captured here with the `capture` skill instead of being stored only in `50_Resources/`.
 
 | CN | EN | Description |
 |---|---|---|
@@ -69,6 +87,14 @@ Content directories are localized. Tool directories remain stable in English so 
 | `产品判断/` | `product-judgment/` | Product direction and feature judgments |
 | `内容策略/` | `content-strategy/` | Content positioning, columns, publishing strategy |
 | `项目路线/` | `project-roadmap/` | Project roadmap and phase choices |
+
+## Three-Layer Boundary
+
+```text
+40_知识库 / 40_Knowledge_Base = core structured llm_wiki knowledge layer
+50_资源 / 50_Resources = tools, links, cases, prompts, and lightweight reference resources
+60_原始资料 / 60_Raw_Sources = traceable evidence and source archive layer
+```
 
 ## Tool Directories
 
