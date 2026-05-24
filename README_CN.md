@@ -1,6 +1,8 @@
 # obsidian_llm_wiki_plus
 
-![系统架构](./CN/Screenshot_cn.png)
+<p align="center">
+  <img src="CN/Screenshot_cn.png" alt="系统架构" width="800">
+</p>
 
 [English](./README.md) | **中文**
 

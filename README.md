@@ -1,12 +1,14 @@
 # obsidian_llm_wiki_plus
 
-![Architecture](./EN/Screenshot_en.png)
+<p align="center">
+  <img src="EN/Screenshot_en.png" alt="Architecture" width="800">
+</p>
 
 **English** | [中文](./README_CN.md)
 
 **Obsidian + LLM Wiki + Agent Skills = a traceable, reusable, and evolving knowledge operating system.**
 
-`obsidian_llm_wiki_plus` is a bilingual Obsidian Vault template designed for people who want AI agents to help maintain a long-term knowledge system.
+`obsidian_llm_wiki_plus` is a bilingual Obsidian Vault template designed for people who want AI agents to help maintain a long-term knowledge system. It functions as a structured "knowledge OS" that sits on top of your existing Obsidian vault, providing the folder structure, metadata standards, and workflow scripts required for AI agents to perform reliable research, synthesis, and maintenance.
 
 It combines raw source capture, deep research, structured wiki integration, project execution, daily review, content creation, and decision records into one agent-friendly Obsidian workflow.
 
