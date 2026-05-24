@@ -1,5 +1,31 @@
 # CHANGELOG_CN
 
+## v1.2
+
+### 新增
+
+- 新增 `doctor` 命令，用于检查已有 Vault 状态，不修改文件。
+- 新增 `diff` 命令，用于对比当前 Vault 与最新模板，不修改文件。
+- 新增 `upgrade` 命令，用于安全升级已有 Vault。
+- 新增 `.olwp/state.json` 支持，用于记录 Vault 安装版本、语言、安装时间和最后升级时间。
+- 新增 `.olwp/upgrade-staging/`、`.olwp/upgrade-plans/`、`.olwp/manifests/`、`.olwp/backups/` 作为升级过程目录。
+- 新增 `CN/OLWP_COMMANDS.md` 与 `EN/OLWP_COMMANDS.md`，作为用户可读的命令清单。
+
+### 升级策略
+
+- `upgrade` 默认只生成升级计划，不修改文件。
+- `upgrade --apply` 只复制安全缺失文件，例如新增 Skill 和命令适配层。
+- 已有文件不会被自动覆盖。
+- 内容不同的文件会进入 `.olwp/upgrade-staging/`，供人工审核和合并。
+- 升级计划写入 `90_计划/待审核/` 或 `90_Planning/review-queue/`。
+- 升级清单写入 `99_系统/日志/` 或 `99_System/logs/`。
+- 用户内容目录永远不会被自动覆盖。
+
+### 优化
+
+- 更新 `bin/olwp.mjs` 的帮助说明，加入 `doctor / diff / upgrade`。
+- 更新 `tools/validate-structure.py`，校验 CN / EN 根目录下的 `OLWP_COMMANDS.md`。
+
 ## v1.1
 
 ### 新增
