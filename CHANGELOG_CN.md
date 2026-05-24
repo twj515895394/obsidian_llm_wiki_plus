@@ -1,5 +1,43 @@
 # CHANGELOG_CN
 
+## v1.1
+
+### 新增
+
+- 新增仓库根目录 `AGENTS.md`，用于约束模板仓库本身的维护规则。
+- 新增 `ask` Skill，用于轻量问答，避免所有问题都进入 capture、research 或 integrate 的重型流程。
+- 新增 `archive` Skill，用于归档已完成项目、已处理收件箱、过期计划和阶段性收尾内容。
+- 新增 `obsidian-markdown` Skill，用于规范 Obsidian Markdown，包括 frontmatter、wikilink、callout、embed、tag 和附件引用。
+- 为新增 Skill 补齐 CN / EN 双版本命令适配层：
+  - `.claude/commands/`
+  - `.gemini/commands/`
+  - `.codex/commands/`
+
+### 优化
+
+- 更新 `CN/.agents/index.md` 与 `EN/.agents/index.md`，纳入 v1.1 新增 Skill。
+- 更新 `CN/AGENTS.md`、`CN/CLAUDE.md`、`CN/GEMINI.md`，补齐 v1.1 Skill 路由和 40 / 50 / 60 三层边界。
+- 更新 `EN/AGENTS.md`、`EN/CLAUDE.md`、`EN/GEMINI.md`，与 CN 版保持语义等价。
+- 将 `parse-knowledge` 的有效思路吸收到 `integrate`，新增“非结构化文本解析模式”。
+- 将 `start-my-day` 的有效思路吸收到 `daily-work`，新增“开始一天 / 早间计划”模式。
+- 明确 `40_知识库` 是 llm_wiki 核心结构化知识层。
+- 明确 `50_资源` 只放工具、链接、案例、提示词模板和轻量参考资源。
+- 明确 `60_原始资料` 是可追溯证据和来源归档层。
+- 更新 `tools/validate-structure.py`，增加对 v1.1 新增 Skill 和仓库根目录 `AGENTS.md` 的校验。
+
+### 未引入
+
+- 未将 `brainstorm` 作为默认 Skill 引入。
+- 未将 AI Newsletter / AI Product 情报类 Skill 放入核心模板。后续可作为可选扩展设计。
+
+## v1.0
+
+- 新增 `package.json` 与 `bin/olwp.mjs`，支持 Node CLI 安装入口。
+- 新增 `install / init / merge / migrate` 命令模式。
+- 新增 `docs/CN/agent-install.md` 与 `docs/EN/agent-install.md`。
+- README 增加一条命令安装、合并和迁移说明。
+- 安装流程默认安全：不删除旧文件，非空目录需要合并/迁移选择。
+
 ## v0.9
 
 ### 新增
@@ -63,12 +101,3 @@
 ## v0.1
 
 - 初始化 CN / EN 双语 Vault 骨架。
-
-
-## v1.0
-
-- 新增 `package.json` 与 `bin/olwp.mjs`，支持 Node CLI 安装入口。
-- 新增 `install / init / merge / migrate` 命令模式。
-- 新增 `docs/CN/agent-install.md` 与 `docs/EN/agent-install.md`。
-- README 增加一条命令安装、合并和迁移说明。
-- 安装流程默认安全：不删除旧文件，非空目录需要合并/迁移选择。
