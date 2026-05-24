@@ -18,8 +18,8 @@ Agent fetches the project → runs the installer → checks target state → ask
 Best for a brand-new vault:
 
 ```bash
-npx degit MarsWang42/obsidian_llm_wiki_plus/CN my-vault
-npx degit MarsWang42/obsidian_llm_wiki_plus/EN my-vault
+npx degit twj515895394/obsidian_llm_wiki_plus/CN my-vault
+npx degit twj515895394/obsidian_llm_wiki_plus/EN my-vault
 ```
 
 This is simple, but it is mainly for empty-vault initialization. It does not handle existing vault migration or merge workflows.
@@ -29,7 +29,7 @@ This is simple, but it is mainly for empty-vault initialization. It does not han
 Best for initialization, merge, or migration workflows:
 
 ```bash
-npx degit MarsWang42/obsidian_llm_wiki_plus .olwp
+npx degit twj515895394/obsidian_llm_wiki_plus .olwp
 python .olwp/tools/init.py --lang EN --target ./my-vault
 python .olwp/tools/migrate.py --lang EN --source ./old-vault --target ./my-vault --init-template --apply
 ```
@@ -45,7 +45,7 @@ npx obsidian_llm_wiki_plus install --lang EN --target ./my-vault
 Or:
 
 ```bash
-npx github:MarsWang42/obsidian_llm_wiki_plus install --lang EN --target ./my-vault
+npx github:twj515895394/obsidian_llm_wiki_plus install --lang EN --target ./my-vault
 ```
 
 This repository includes `package.json` and `bin/olwp.mjs` to support this mode.
@@ -123,13 +123,13 @@ Do not overwrite existing files without confirmation.
 The agent may run:
 
 ```bash
-npx github:MarsWang42/obsidian_llm_wiki_plus install --lang EN --target .
+npx github:twj515895394/obsidian_llm_wiki_plus install --lang EN --target .
 ```
 
 If the user provides an old vault path:
 
 ```bash
-npx github:MarsWang42/obsidian_llm_wiki_plus install --lang EN --target ./new-vault --source ./old-vault --apply
+npx github:twj515895394/obsidian_llm_wiki_plus install --lang EN --target ./new-vault --source ./old-vault --apply
 ```
 
 ## Safety principles
