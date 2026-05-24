@@ -19,30 +19,82 @@ Use this skill when the user asks for:
 - plan tomorrow
 - review progress
 
-## Workflow
+## Modes
 
-### Morning / Planning
+### Mode A: Start the Day / Morning Planning
 
-1. Check recent project notes, planning items, and unresolved tasks.
-2. Identify today’s priorities.
-3. Separate must-do, should-do, and optional items.
-4. Note risks, blockers, and focus areas.
-5. Create or update today’s daily note.
+1. Get today’s date.
+2. Read yesterday’s daily note.
+   - Path: `10_Daily/YYYY-MM-DD.md`
+   - Extract unfinished tasks.
+   - Note what was worked on yesterday.
+3. Check active projects.
+   - Search `20_Projects/` for projects with `status: active`.
+   - Identify current phase, pending actions, last update date, and stale projects.
+4. Check inbox.
+   - Review pending items in `00_Inbox/`.
+   - Count items and flag whether cleanup may be needed.
+5. Check planning areas.
+   - `90_Planning/todo/`
+   - `90_Planning/review-queue/`
+   - `90_Planning/roadmap/`
+6. Ask the user for today’s main focus.
+   - Prefer options based on active projects.
+   - Allow new focus input.
+7. Create or update today’s daily note.
+   - Use `99_System/templates/daily-note.md`.
+   - Save to `10_Daily/YYYY-MM-DD.md`.
 
-### During the Day
+### Mode B: During the Day
 
-1. Capture progress updates.
-2. Link work to projects or research notes.
-3. Move new ideas into `00_Inbox/` if not immediately processed.
-4. Record important decisions or issues.
+Record:
 
-### Evening / Review
+- completed work
+- inserted tasks
+- decision changes
+- new sources
+- new problems
+- reusable knowledge candidates
 
-1. Summarize what was completed.
-2. Record what changed.
-3. Identify unfinished items.
-4. Extract reusable lessons or knowledge candidates.
-5. Prepare tomorrow’s next actions.
+If external material appears, route to `capture`.
+If an important judgment appears, route to `decision-record`.
+If reusable knowledge appears, route to `integrate`.
+
+### Mode C: Evening Review
+
+1. Compare against today’s plan.
+2. Summarize completed work.
+3. Record unfinished items.
+4. Identify blockers and reasons.
+5. Extract reusable lessons.
+6. Prepare tomorrow’s next actions.
+7. Update projects, knowledge base, or decision center when needed.
+
+## Daily Note Structure
+
+```markdown
+# YYYY-MM-DD Daily Note
+
+## Focus
+
+## Planned Tasks
+
+## Actual Progress
+
+## Inserted Tasks
+
+## Blockers and Problems
+
+## New Sources
+
+## New Judgments / Decisions
+
+## Knowledge Candidates
+
+## Review
+
+## Tomorrow
+```
 
 ## Output Location
 
@@ -50,40 +102,55 @@ Use this skill when the user asks for:
 10_Daily/
 ```
 
-Tasks and future items may go to:
+Recommended filename:
 
 ```text
-90_Planning/todo/
+YYYY-MM-DD.md
 ```
 
-Unprocessed ideas may go to:
+Unprocessed ideas go to:
 
 ```text
 00_Inbox/
 ```
 
-## Template
-
-Use:
+Future tasks or review items go to:
 
 ```text
-99_System/templates/daily-note.md
+90_Planning/todo/
+90_Planning/review-queue/
 ```
+
+## Skill Links
+
+- Quick question: use `ask`.
+- External source: use `capture`.
+- Research issue: use `research`.
+- Reusable lesson: use `integrate`.
+- Important judgment: use `decision-record`.
+- New project: use `kickoff`.
+- Phase closure: use `archive`.
 
 ## Boundaries
 
-Do not turn the daily note into a dumping ground.
+Do not overload the daily plan.
 
-Project-specific details should link to `20_Projects/`.
+Keep today’s focus to at most 3 major items.
 
-Reusable knowledge should later be processed by `integrate`.
+Do not turn every temporary idea into a wiki page.
+
+Separate facts, feelings, problems, and next actions during review.
+
+If today’s note already exists, update it carefully instead of overwriting it.
 
 ## Quality Check
 
 Before finishing, check:
 
-- Today’s priorities are clear.
+- Today’s priorities are clear and limited.
+- Yesterday’s note and unfinished tasks were checked.
+- Active projects and inbox were reviewed.
 - Completed and unfinished items are separated.
-- Follow-ups are visible.
-- Project links exist when relevant.
-- Knowledge candidates are not lost.
+- Blockers are visible.
+- Tomorrow’s next actions are clear.
+- Project, knowledge, or decision follow-ups are not lost.
