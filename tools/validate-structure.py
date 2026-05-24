@@ -9,7 +9,6 @@ Examples:
 from __future__ import annotations
 
 import argparse
-import sys
 from pathlib import Path
 from typing import Iterable
 
@@ -109,7 +108,7 @@ def validate(root: Path, strict_placeholders: bool = False) -> tuple[list[str], 
     for lang, dirs in [("CN", CN_DIRS), ("EN", EN_DIRS)]:
         base = root / lang
         check_path(base, errors)
-        for file in ["README.md", "START_HERE.md", "CLAUDE.md", "AGENTS.md", "GEMINI.md"]:
+        for file in ["README.md", "START_HERE.md", "CLAUDE.md", "AGENTS.md", "GEMINI.md", "OLWP_COMMANDS.md"]:
             check_path(base / file, errors)
         for d in dirs:
             check_path(base / d, errors)
