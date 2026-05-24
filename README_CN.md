@@ -1,10 +1,12 @@
 # obsidian_llm_wiki_plus
 
+[English](./README.md) | **中文**
+
 **Obsidian + LLM Wiki + Agent Skills = 一个可追溯、可复用、可演化的知识操作系统。**
 
 `obsidian_llm_wiki_plus` 是一个面向 Obsidian 和 AI Agent 的双语知识库模板项目。
 
-它不是普通的 Obsidian 笔记模板，也不是单纯的任务管理系统，而是尝试把以下能力组合到一个 Vault 中：
+它不是普通的 Obsidian 笔记模板，也不是单纯的任务管理系统，而是把以下能力组合到一个 Vault 中：
 
 - 原始资料保存
 - 深度研究分析
@@ -15,74 +17,179 @@
 - 长期决策记录
 - Agent Skills 工作流
 
-你可以直接复制 `CN/` 或 `EN/` 目录作为自己的 Obsidian Vault，然后在该目录中使用 Claude Code、Codex、Gemini CLI 等 AI Agent 协同维护知识系统。
+你可以直接使用 `CN/` 或 `EN/` Vault 模板，也可以用内置 CLI 把它安装、合并或迁移到已有 Obsidian Vault 中。
+
+---
+
+## 为什么做这个项目？
+
+很多人使用 Obsidian、Notion、Markdown 或各种知识库工具时，会遇到几个长期问题：
+
+1. **资料很多，但很难追溯来源**  
+   看过很多网页、PDF、GitHub 项目、文章、视频，但后面很难知道某个结论来自哪里。
+
+2. **笔记很多，但没有变成知识系统**  
+   笔记是孤立的，缺少实体、概念、观点、决策、方法论、综合分析之间的连接。
+
+3. **AI 对话很有价值，但用完就丢了**  
+   和 LLM 讨论出来的方案、判断、代码思路、内容选题，经常散落在聊天记录里，无法复用。
+
+4. **研究、项目、内容创作是割裂的**  
+   今天调研的东西，明天写文章用不上；项目里的经验，后续也很难沉淀成方法论。
+
+5. **知识会过期，但没人提醒你复查**  
+   技术选型、AI 工具、模型能力、产品策略都在变化，旧结论如果不标记生命周期，容易误导后续判断。
+
+这个项目的目标，是把 Obsidian 变成一个 AI Agent 可以安全参与维护的结构化知识操作系统。
 
 ---
 
 ## 适合谁使用？
 
-这个模板适合正在长期积累复杂知识的人，尤其适合：
+这个模板适合：
 
-- 需要持续跟踪 AI、Agent、LLM、本地模型、工具生态的技术人员；
-- 需要把项目经验、架构判断、方案设计沉淀成长期资产的团队或个人；
+- 持续跟踪 AI、Agent、LLM、本地模型、工具生态的技术人员；
+- 希望把项目经验、架构判断、方案设计沉淀成长期资产的团队或个人；
 - 需要从研究资料中持续产出文章、推文、视频脚本、选题库的内容创作者；
 - 已经在使用 Obsidian，但希望让 AI Agent 更稳定地参与资料整理、研究、知识沉淀和复盘的人；
 - 希望保留原始来源、避免 AI 总结失真，并能持续复查旧结论的人。
 
-它不适合只想要一个极简日记模板、只做普通待办清单，或者不希望维护任何结构化规则的用户。
+它不适合只想要极简日记模板、普通待办清单，或者不希望维护任何结构化规则的用户。
 
 ---
 
-## 第一次打开后先做什么？
+## 快速开始
 
-建议先按这个顺序使用：
+### 方式一：从 GitHub 一条命令安装
 
-1. 打开 `CN/START_HERE.md` 或 `EN/START_HERE.md`。
-2. 阅读当前 Vault 的 `CLAUDE.md`、`AGENTS.md` 或 `GEMINI.md`，确认 Agent 入口规则。
-3. 把一条你近期正在研究的链接或文档交给 Agent，让它按 `capture` 保存 source card。
-4. 让 Agent 基于该资料生成一篇 `research` 研究笔记。
-5. 再让 Agent 使用 `integrate`，把可复用结论沉淀到 `40_知识库/`。
+安装中文版 Vault：
 
-这条最小链路能帮助你验证整个系统是否符合预期：
-
-```text
-外部资料 → 60_原始资料 → 30_研究 → 40_知识库
+```bash
+npx github:twj515895394/obsidian_llm_wiki_plus install --lang CN --target ./my-vault
 ```
 
+安装英文版 Vault：
+
+```bash
+npx github:twj515895394/obsidian_llm_wiki_plus install --lang EN --target ./my-vault
+```
+
+当目标目录为空时，安装器会直接初始化新 Vault。
+
+当目标目录非空时，安装器会询问你要：
+
+1. 合并缺失模板文件；
+2. 覆盖模板文件；
+3. 迁移另一个来源目录到暂存区；
+4. 取消。
+
+默认情况下，安装器不会删除旧文件，也不会在未确认时覆盖已有文件。
+
+### 方式二：使用本地 Python 工具
+
+克隆仓库后执行：
+
+```bash
+git clone git@github.com:twj515895394/obsidian_llm_wiki_plus.git
+cd obsidian_llm_wiki_plus
+python tools/init.py --lang CN --target ./my-vault
+```
+
+英文版：
+
+```bash
+python tools/init.py --lang EN --target ./my-vault
+```
+
+### 方式三：手动复制模板目录
+
+```bash
+cp -r CN my-vault
+# 或
+cp -r EN my-vault
+```
+
+手动复制仍然支持，但实际使用更推荐 CLI 安装器。
+
 ---
 
-## 这个项目解决什么问题？
+## 迁移已有 Obsidian Vault
 
-很多人使用 Obsidian、Notion、Markdown 或各种知识库工具时，会遇到几个长期问题：
+如果你已经有自己的 Obsidian Vault 或 Markdown 文档目录，不建议直接手动复制到 `40_知识库/`。
 
-1. **资料很多，但很难追溯来源**：看过很多网页、PDF、GitHub 项目、文章、视频，但后面很难知道某个结论来自哪里。
-2. **笔记很多，但没有变成知识系统**：笔记是孤立的，缺少概念、观点、决策、方法论之间的连接。
-3. **AI 对话很有价值，但用完就丢了**：和 LLM 讨论出来的方案、判断、代码思路、内容选题，经常散落在聊天记录里，无法复用。
-4. **研究、项目、内容创作是割裂的**：今天调研的东西，明天写文章用不上；项目里的经验，后续也很难沉淀成方法论。
-5. **知识会过期，但没人提醒你复查**：技术选型、AI 工具、模型能力、产品策略都在变化，旧结论如果不标记生命周期，容易误导后续判断。
+推荐使用迁移流程：
+
+```bash
+npx github:twj515895394/obsidian_llm_wiki_plus migrate \
+  --lang CN \
+  --source ./old-vault \
+  --target ./new-vault \
+  --init-template \
+  --apply
+```
+
+英文版迁移：
+
+```bash
+npx github:twj515895394/obsidian_llm_wiki_plus migrate \
+  --lang EN \
+  --source ./old-vault \
+  --target ./new-vault \
+  --init-template \
+  --apply
+```
+
+迁移设计是安全优先：
+
+- 复制文件，而不是移动文件；
+- 不删除旧 Vault；
+- 旧文档先进入收件箱暂存区；
+- 生成迁移计划和 manifest；
+- 后续由用户和 Agent 使用 `research`、`integrate`、`decision-record` 逐步整理。
 
 ---
 
-## 核心理念
+## 让 AI Agent 帮你安装
 
-本项目围绕 6 个原则设计：
+你可以对 Claude Code、Codex、Gemini CLI 或其他 Agent 说：
 
-1. **原始资料可追溯**：外部链接、GitHub 项目、PDF、网页、论文、视频、本地文件、粘贴文本等，都可以作为原始资料进入 `60_原始资料/`。原始资料是证据层，不应该被 AI 直接改写覆盖。
-2. **研究过程可沉淀**：深度研究不只是生成一篇报告，还应该提取实体、概念、方法论、观点、决策、综合分析和对比分析。
-3. **知识结构可演化**：知识页需要保留来源、更新时间、置信度、状态、待验证问题、相关页面和后续复查时间。
-4. **项目经验可复用**：项目不只是任务清单，还应该沉淀背景、目标、方案、关键决策、风险、复盘和可复用经验。
-5. **内容创作可从知识库生长**：X、公众号、小红书、视频脚本、热点早晚报等内容，应从已有研究、知识页、决策记录、问答沉淀中提取素材。
-6. **重要决策可审计**：技术选型、架构判断、产品方向、内容策略、项目路线，都应该形成决策记录。
+```text
+帮我安装 obsidian_llm_wiki_plus 到当前 Obsidian Vault。
+GitHub 仓库是：https://github.com/twj515895394/obsidian_llm_wiki_plus。
+如果目录为空，就初始化 CN 版。
+如果目录不为空，先询问我是合并模板、覆盖模板文件，还是迁移已有文档。
+不要直接覆盖已有文件。
+```
+
+Agent 应执行类似命令：
+
+```bash
+npx github:twj515895394/obsidian_llm_wiki_plus install --lang CN --target .
+```
+
+英文版：
+
+```bash
+npx github:twj515895394/obsidian_llm_wiki_plus install --lang EN --target .
+```
+
+更多说明：
+
+- [Agent 安装说明](./docs/CN/agent-install.md)
+- [自动化说明](./docs/CN/automation.md)
 
 ---
 
-## 项目结构
+## 仓库结构
 
 ```text
 obsidian_llm_wiki_plus/
 ├── README.md
 ├── README_CN.md
 ├── LICENSE
+├── package.json
+├── bin/
+│   └── olwp.mjs
 ├── docs/
 │   ├── CN/
 │   └── EN/
@@ -93,120 +200,25 @@ obsidian_llm_wiki_plus/
 
 | 路径 | 说明 |
 |---|---|
-| `README_CN.md` | 中文项目说明 |
-| `README.md` | 英文项目说明 |
-| `docs/CN/` | 中文设计文档 |
-| `docs/EN/` | 英文设计文档 |
-| `tools/` | 后续初始化、同步、校验脚本预留目录 |
-| `CN/` | 中文版 Obsidian Vault 模板 |
-| `EN/` | 英文版 Obsidian Vault 模板 |
+| `README.md` | 英文 README |
+| `README_CN.md` | 中文 README |
+| `CN/` | 中文 Obsidian Vault 模板 |
+| `EN/` | 英文 Obsidian Vault 模板 |
+| `docs/CN/` | 中文设计与使用文档 |
+| `docs/EN/` | 英文设计与使用文档 |
+| `tools/` | Python 初始化、迁移、校验工具 |
+| `bin/olwp.mjs` | 支持 `npx github:...` 的 Node CLI 安装器 |
+| `package.json` | CLI 包元数据 |
 
 ---
 
-## 快速开始
+## Vault 结构
 
-### 推荐方式：使用初始化脚本
-
-中文版：
-
-```bash
-python tools/init.py --lang CN --target ./my-knowledge-vault
-```
-
-英文版：
-
-```bash
-python tools/init.py --lang EN --target ./my-knowledge-vault
-```
-
-如果目标目录非空，脚本默认会拒绝覆盖。确认要合并并覆盖模板文件时，可以添加：
-
-```bash
---force
-```
-
-例如：
-
-```bash
-python tools/init.py --lang CN --target ./my-knowledge-vault --force
-```
-
-初始化后，用 Obsidian 打开目标目录，并先阅读 `START_HERE.md`。
-
-
-### 使用中文版 Vault
-
-```bash
-cp -r CN my-knowledge-vault
-```
-
-然后用 Obsidian 打开 `my-knowledge-vault`，也可以在该目录中启动 Claude Code、Codex、Gemini CLI 等 Agent 工具。
-
-### 使用英文版 Vault
-
-```bash
-cp -r EN my-knowledge-vault
-```
-
-然后用 Obsidian 打开该目录。
-
-
-### 迁移已有 Obsidian Vault 或文档目录
-
-如果你已经有自己的 Obsidian Vault 或 Markdown 文档目录，不建议直接手动复制到 `40_知识库/`。推荐先使用迁移工具生成计划：
-
-```bash
-python tools/migrate.py --lang CN --source ~/OldVault --target ~/NewVault
-```
-
-确认计划后再执行迁移：
-
-```bash
-python tools/migrate.py --lang CN --source ~/OldVault --target ~/NewVault --apply
-```
-
-如果目标 Vault 还没有初始化，可以迁移时一起初始化：
-
-```bash
-python tools/migrate.py --lang CN --source ~/OldVault --target ~/NewVault --init-template --apply
-```
-
-迁移工具默认采用安全策略：只复制、不移动、不删除原文件；旧文档会进入 `00_收件箱/迁移导入/`，同时生成 `90_计划/待审核/migration-plan-*.md` 和 `99_系统/日志/migration-manifest-*.csv`，方便后续审核和整理。
-
----
-
-
-
-### 方式三：一条命令安装 / 合并 / 迁移
-
-如果项目已经发布为 npm 包，可以使用：
-
-```bash
-npx obsidian_llm_wiki_plus install --lang CN --target ./my-vault
-```
-
-如果直接从 GitHub 执行：
-
-```bash
-npx github:twj515895394/obsidian_llm_wiki_plus install --lang CN --target ./my-vault
-```
-
-如果你已经有旧的 Obsidian Vault 或文档目录：
-
-```bash
-npx github:twj515895394/obsidian_llm_wiki_plus install --lang CN --target ./new-vault --source ./old-vault --apply
-```
-
-安装器会在目标目录非空时询问：合并模板、覆盖模板文件、迁移旧文档，还是取消。默认不会删除用户原文件。
-
-更多说明见：`docs/CN/agent-install.md`。
-
----
-
-## CN 版 Vault 目录结构
+### 中文模板
 
 ```text
 CN/
+├── START_HERE.md
 ├── README.md
 ├── CLAUDE.md
 ├── AGENTS.md
@@ -229,94 +241,144 @@ CN/
 └── .codex/
 ```
 
-| 目录 | 说明 |
-|---|---|
-| `00_收件箱/` | 临时输入、碎片想法、待处理内容 |
-| `10_日记/` | 每日计划、工作记录、每日复盘 |
-| `20_项目/` | 项目文档、任务推进、交付物 |
-| `30_研究/` | 深度研究、主题调研、技术分析 |
-| `35_问答沉淀/` | 高价值 AI 问答、可复用对话结果 |
-| `40_知识库/` | 结构化 Wiki，包含实体、概念、观点、方法论等 |
-| `50_资源/` | 工具、链接、素材、案例、参考资料 |
-| `60_原始资料/` | 原始来源、附件、网页快照、仓库快照、导入资料 |
-| `70_内容创作/` | X、公众号、小红书、视频脚本、选题库、素材库 |
-| `80_决策中心/` | 技术选型、架构决策、产品判断、内容策略、项目路线 |
-| `90_计划/` | 待执行、待审核、路线图、归档 |
-| `99_系统/` | 系统规则、模板、日志、生命周期管理 |
-| `.agents/` | 通用 Agent Skills 主目录 |
-| `.claude/` | Claude Code 命令适配层 |
-| `.gemini/` | Gemini CLI 命令适配层 |
-| `.codex/` | Codex 命令适配层 |
+### 英文模板
+
+```text
+EN/
+├── START_HERE.md
+├── README.md
+├── CLAUDE.md
+├── AGENTS.md
+├── GEMINI.md
+├── 00_Inbox/
+├── 10_Daily/
+├── 20_Projects/
+├── 30_Research/
+├── 35_QA_Library/
+├── 40_Knowledge_Base/
+├── 50_Resources/
+├── 60_Raw_Sources/
+├── 70_Content_Creation/
+├── 80_Decision_Center/
+├── 90_Planning/
+├── 99_System/
+├── .agents/
+├── .claude/
+├── .gemini/
+└── .codex/
+```
 
 ---
 
-## Agent Skills 系统
+## Agent Skills
 
-本项目使用 `.agents/skills/` 作为统一 Skill 主目录。
-
-第一版包含 7 个核心 Skill：
+主 Skill 目录是：
 
 ```text
 .agents/skills/
-├── capture/
-├── research/
-├── integrate/
-├── kickoff/
-├── daily-work/
-├── decision-record/
-└── content-create/
 ```
 
-| Skill | 中文名 | 作用 |
-|---|---|---|
-| `capture` | 资料捕获 | 处理外部链接、GitHub、PDF、本地文件、网页、视频、长文本等原始资料 |
-| `research` | 深度研究 | 对项目、技术、产品、主题进行系统分析 |
-| `integrate` | 知识沉淀 | 将研究结果、问答、项目经验沉淀到结构化 Wiki |
-| `kickoff` | 项目启动 | 创建项目计划、项目文档和推进结构 |
-| `daily-work` | 每日计划 / 复盘 | 支持每日启动、每日记录、每日复盘 |
-| `decision-record` | 决策记录 | 记录技术选型、架构判断、内容策略、项目路线等重要决策 |
-| `content-create` | 内容创作 | 从知识库生成 X、公众号、小红书、视频脚本等内容 |
+第一版包含 7 个核心 Skill：
 
-`.claude/`、`.gemini/`、`.codex/` 只做命令转发，不维护重复 Skill 内容。
+| Skill | 作用 |
+|---|---|
+| `capture` | 捕获外部链接、GitHub 仓库、PDF、本地文件、网页、视频、论文、长文本等原始资料。 |
+| `research` | 对项目、技术、工具、产品、主题做深度研究。 |
+| `integrate` | 将研究结果、问答、项目经验沉淀到结构化 Wiki。 |
+| `kickoff` | 启动新项目、新系统、新专题或长期任务。 |
+| `daily-work` | 支持每日计划、每日记录和每日复盘。 |
+| `decision-record` | 记录技术选型、架构决策、产品判断、内容策略和项目路线。 |
+| `content-create` | 从知识库生成 X、公众号、小红书、视频脚本和内容简报。 |
+
+工具专属目录只做适配层：
+
+```text
+.claude/commands/
+.gemini/commands/
+.codex/commands/
+```
+
+它们指向 `.agents/skills/`，不重复维护规则。
 
 ---
 
-## 典型使用场景
+## 核心设计原则
 
-1. **保存外部资料**：用户提供 GitHub 链接、文章链接、PDF 或本地文件路径时，Agent 先判断是否触发 `capture`。
-2. **做深度研究**：研究结果进入 `30_研究/`，可复用知识通过 `integrate` 沉淀到 `40_知识库/`。
-3. **沉淀高价值问答**：AI 对话可保存到 `35_问答沉淀/`，再提取概念、观点、方法论或决策。
-4. **启动项目**：项目文档进入 `20_项目/`。
-5. **记录决策**：技术选型、架构路线、产品判断、内容策略进入 `80_决策中心/`。
-6. **内容创作**：X、公众号、小红书、视频脚本等进入 `70_内容创作/`。
+1. **资料可追溯**  
+   原始链接、文件、截图、PDF、视频、粘贴文本，先作为来源保存，再加工成结论。
+
+2. **证据和解释分离**  
+   `60_原始资料/` 保存证据，`30_研究/` 保存分析，`40_知识库/` 保存可复用知识，`80_决策中心/` 保存重要决策。
+
+3. **知识可演化**  
+   知识页应包含来源、状态、置信度、复查时间、待验证问题等元数据。
+
+4. **迁移安全优先**  
+   已有旧笔记先进入收件箱暂存区，不自动分类为最终知识页。
+
+5. **Agent 友好执行**  
+   复杂操作通过短 Skill 路由，而不是依赖一个巨大的总规则文件。
 
 ---
 
-## 双语设计原则
+## 文档
 
-- 内容目录本地化：CN 使用中文目录名，EN 使用英文目录名。
-- 工具目录保持英文稳定：`.agents/`、`.claude/`、`.gemini/`、`.codex/` 在 CN/EN 中一致。
-- Skill 目录保持英文：`capture`、`research`、`integrate` 等保持一致。
-- 文档内容本地化：CN 中文，EN 英文。
+中文文档：
+
+- [设计说明](./docs/CN/design.md)
+- [使用指南](./docs/CN/usage-guide.md)
+- [Skill 系统](./docs/CN/skill-system.md)
+- [目录映射](./docs/CN/directory-map.md)
+- [双语维护规则](./docs/CN/bilingual-rules.md)
+- [自动化说明](./docs/CN/automation.md)
+- [Agent 安装说明](./docs/CN/agent-install.md)
+- [质量检查](./docs/CN/quality-check.md)
+
+英文文档：
+
+- [Design](./docs/EN/design.md)
+- [Usage guide](./docs/EN/usage-guide.md)
+- [Skill system](./docs/EN/skill-system.md)
+- [Directory map](./docs/EN/directory-map.md)
+- [Bilingual rules](./docs/EN/bilingual-rules.md)
+- [Automation](./docs/EN/automation.md)
+- [Agent install](./docs/EN/agent-install.md)
+- [Quality check](./docs/EN/quality-check.md)
+
+---
+
+## 校验项目结构
+
+```bash
+python tools/validate-structure.py --strict-placeholders
+```
+
+或：
+
+```bash
+npm run validate
+```
 
 ---
 
 ## 当前状态
 
-第一版目标：完整 CN/EN 骨架、根目录 README、CN/EN Agent 入口文件、7 个核心 Skill、系统规则文档、基础模板、命令转发层和详细 handoff 文档。
+当前发布目标：**v1.0.0**
 
-`tools/` 目录暂时只保留说明文档，后续再提供初始化脚本、结构同步脚本和校验脚本。
+已包含：
 
+- CN / EN 双语 Vault 模板
+- 根目录中英文 README
+- Agent 入口文件
+- 7 个核心 Skill
+- 系统规则与模板
+- Claude、Gemini、Codex 命令适配层
+- Python 初始化 / 迁移 / 校验工具
+- Node CLI 安装器
+- 已有 Vault 迁移工作流
 
 ---
 
-## v0.5 使用说明
+## License
 
-v0.5 增加了 `START_HERE.md`、目录级 README 优化和示例文件。
-
-建议新用户先阅读：
-
-1. `CN/START_HERE.md`
-2. `CN/CLAUDE.md` 或 `CN/AGENTS.md`
-3. `CN/.agents/index.md`
-4. `CN/99_系统/示例/`
+MIT
