@@ -5,7 +5,8 @@ param(
   [switch]$InitTemplate,
   [switch]$Force
 )
-$argsList = @("tools/migrate.py", "--lang", "CN", "--source", $Source, "--target", $Target)
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$argsList = @("$ScriptDir/migrate.py", "--lang", "CN", "--source", $Source, "--target", $Target)
 if ($Apply) { $argsList += "--apply" }
 if ($InitTemplate) { $argsList += "--init-template" }
 if ($Force) { $argsList += "--force" }
