@@ -1,4 +1,4 @@
-# OS generated files
+# OS files
 .DS_Store
 .DS_Store?
 ._*
@@ -7,11 +7,33 @@
 ehthumbs.db
 Thumbs.db
 
-# Node
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Node dependencies and package output
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+*.tgz
 
-# Local vault test output
+# Local test vaults / generated output
+my-vault/
 my-knowledge-vault/
+test-vault/
+tmp-vault/
+.old-vault/
+.olwp/
+
+# Obsidian local workspace cache
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+.trash/
+
+# Environment files
+.env
+.env.*
