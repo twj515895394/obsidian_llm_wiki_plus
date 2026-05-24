@@ -188,13 +188,13 @@ npx obsidian_llm_wiki_plus install --lang CN --target ./my-vault
 如果直接从 GitHub 执行：
 
 ```bash
-npx github:MarsWang42/obsidian_llm_wiki_plus install --lang CN --target ./my-vault
+npx github:twj515895394/obsidian_llm_wiki_plus install --lang CN --target ./my-vault
 ```
 
 如果你已经有旧的 Obsidian Vault 或文档目录：
 
 ```bash
-npx github:MarsWang42/obsidian_llm_wiki_plus install --lang CN --target ./new-vault --source ./old-vault --apply
+npx github:twj515895394/obsidian_llm_wiki_plus install --lang CN --target ./new-vault --source ./old-vault --apply
 ```
 
 安装器会在目标目录非空时询问：合并模板、覆盖模板文件、迁移旧文档，还是取消。默认不会删除用户原文件。

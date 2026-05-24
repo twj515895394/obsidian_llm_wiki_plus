@@ -111,7 +111,7 @@ npx obsidian_llm_wiki_plus install --lang EN --target ./my-vault
 If running directly from GitHub via npx:
 
 ```bash
-npx github:MarsWang42/obsidian_llm_wiki_plus install --lang CN --target ./my-vault
+npx github:twj515895394/obsidian_llm_wiki_plus install --lang CN --target ./my-vault
 ```
 
 Commands:

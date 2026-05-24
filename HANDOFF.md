@@ -51,13 +51,13 @@ node bin/olwp.mjs install --lang CN --target ./my-vault
 如果只想直接拉 CN 模板：
 
 ```bash
-npx degit MarsWang42/obsidian_llm_wiki_plus/CN my-vault
+npx degit twj515895394/obsidian_llm_wiki_plus/CN my-vault
 ```
 
 如果想使用完整安装器：
 
 ```bash
-npx github:MarsWang42/obsidian_llm_wiki_plus install --lang CN --target ./my-vault
+npx github:twj515895394/obsidian_llm_wiki_plus install --lang CN --target ./my-vault
 ```
 
 如果未来发布 npm 包：
