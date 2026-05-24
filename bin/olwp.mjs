@@ -3,12 +3,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 import readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
+import { fileURLToPath } from 'node:url';
 
 const SKIP_NAMES = new Set(['.DS_Store', 'Thumbs.db']);
 const EXCLUDE_DIRS = new Set(['.git', '.obsidian', '.trash', 'node_modules', '__pycache__', '.agents', '.claude', '.gemini', '.codex']);
 const DEFAULT_EXTS = new Set(['.md', '.markdown', '.txt', '.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.csv', '.json', '.yaml', '.yml', '.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg', '.mp3', '.wav', '.m4a', '.mp4', '.mov', '.zip']);
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const root = path.resolve(__dirname, '..');
 
 function usage() {
   console.log(`obsidian_llm_wiki_plus CLI
@@ -112,6 +115,7 @@ async function choose(message, choices, yes = false, defaultChoice = null) {
 }
 
 function initVault(lang, target, { force = false } = {}) {
+  if (!target) fail('--target is required for init');
   const cfg = langConfig(lang);
   const src = path.join(root, cfg.template);
   const dst = path.resolve(target);
@@ -123,6 +127,7 @@ function initVault(lang, target, { force = false } = {}) {
 }
 
 function mergeTemplate(lang, target, { overwrite = false } = {}) {
+  if (!target) fail('--target is required for merge');
   const cfg = langConfig(lang);
   const src = path.join(root, cfg.template);
   const dst = path.resolve(target);
@@ -162,6 +167,8 @@ function csvEscape(v) {
 }
 
 function migrate(lang, source, target, { initTemplate = false, apply = false, yes = false } = {}) {
+  if (!source) fail('--source is required for migrate');
+  if (!target) fail('--target is required for migrate');
   const cfg = langConfig(lang);
   const src = path.resolve(source);
   const dst = path.resolve(target);
