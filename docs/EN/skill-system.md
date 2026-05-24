@@ -21,17 +21,20 @@ Templates stabilize output formats.
 .agents/skills/
 ```
 
-The first version includes seven core skills:
+The current version includes 10 core skills:
 
 | Skill | Purpose |
 |---|---|
+| `ask` | Answer quick questions, explain concepts, make lightweight judgments, and avoid over-engineering simple interactions |
 | `capture` | Capture external links, GitHub repositories, PDFs, local paths, web pages, videos, and long-form text as raw sources |
 | `research` | Analyze projects, technologies, products, and topics systematically |
-| `integrate` | Convert research, Q&A, and project lessons into structured wiki pages |
+| `integrate` | Convert research, Q&A, project lessons, and unstructured text into structured wiki pages |
 | `kickoff` | Create project goals, plans, structure, and execution notes |
-| `daily-work` | Support daily planning, logs, reviews, and next-day planning |
+| `daily-work` | Support start-day workflows, daily planning, logs, reviews, and next-day planning |
 | `decision-record` | Record technical selections, architecture decisions, product judgments, content strategies, and project roadmap decisions |
 | `content-create` | Create X posts, newsletters, Rednote posts, video scripts, and other content from the knowledge base |
+| `archive` | Archive completed projects, processed inbox items, outdated plans, and phase-complete materials |
+| `obsidian-markdown` | Define Obsidian Markdown conventions for frontmatter, wikilinks, callouts, embeds, tags, and attachments |
 
 ## Tool Adapter Structure
 
@@ -61,7 +64,15 @@ Do not duplicate full skill rules inside tool adapters, otherwise the rules may 
 
 ## Common Skill Chains
 
-### 1. External Source Research Chain
+### 1. Quick Q&A Chain
+
+```text
+ask → 35_QA_Library (optional) → integrate (optional)
+```
+
+Use this for short explanations, quick judgments, placement questions, and temporary Q&A that does not need a heavy workflow.
+
+### 2. External Source Research Chain
 
 ```text
 capture → research → integrate → decision-record (optional)
@@ -69,7 +80,7 @@ capture → research → integrate → decision-record (optional)
 
 Use this for GitHub projects, papers, technical documents, and competitor materials.
 
-### 2. Project Kickoff Chain
+### 3. Project Kickoff Chain
 
 ```text
 kickoff → decision-record → daily-work → integrate
@@ -77,7 +88,7 @@ kickoff → decision-record → daily-work → integrate
 
 Use this for new projects, systems, and long-running initiatives.
 
-### 3. Content Creation Chain
+### 4. Content Creation Chain
 
 ```text
 research / integrate → content-create → decision-record (optional)
@@ -85,13 +96,31 @@ research / integrate → content-create → decision-record (optional)
 
 Use this for X posts, newsletters, Rednote posts, video scripts, and briefings.
 
-### 4. Daily Work Chain
+### 5. Daily Work Chain
 
 ```text
-daily-work → kickoff / research / decision-record / integrate
+daily-work → kickoff / research / decision-record / integrate / archive
 ```
 
-Use this for starting the day, tracking progress, and reviewing work.
+Use this for starting the day, tracking progress, reviewing work, and closing phases.
+
+### 6. Lifecycle Closure Chain
+
+```text
+daily-work / kickoff → archive
+```
+
+Use this for completed projects, processed inbox items, outdated plans, and phase-complete materials.
+
+## 40 / 50 / 60 Boundary
+
+```text
+40_Knowledge_Base = core structured llm_wiki knowledge layer
+50_Resources = tools / links / cases / prompts / lightweight reference resources
+60_Raw_Sources = traceable evidence and source archive layer
+```
+
+Structured wiki pages should not go into `50_Resources/`. Formal evidence should enter `60_Raw_Sources/` through `capture`.
 
 ## Execution Safety Boundaries
 
@@ -125,7 +154,8 @@ Do not turn a skill into a long essay. Put broader explanations into `docs/` or 
 
 ## Maintenance Recommendations
 
-- When updating a skill, sync CN and EN whenever possible.
+- When updating a skill, sync CN and EN.
 - When changing paths, update the command adapter files.
-- When adding a new skill, update `.agents/index.md`, entry files, docs, and changelog.
+- When adding a new skill, update `.agents/index.md`, entry files, docs, changelog, and `tools/validate-structure.py`.
 - Do not allow `.claude/.gemini/.codex` to become a second source of rules.
+- Current-facing documentation should say “10 core skills”; historical changelog / handoff entries may keep older version records.
