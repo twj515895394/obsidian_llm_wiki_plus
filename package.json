@@ -1,0 +1,42 @@
+{
+  "name": "obsidian_llm_wiki_plus",
+  "version": "1.0.0",
+  "description": "Obsidian + LLM Wiki + Agent Skills bilingual vault template.",
+  "type": "module",
+  "bin": {
+    "olwp": "bin/olwp.mjs",
+    "obsidian-llm-wiki-plus": "bin/olwp.mjs"
+  },
+  "scripts": {
+    "validate": "python tools/validate-structure.py --strict-placeholders",
+    "init:cn": "python tools/init.py --lang CN --target ./my-knowledge-vault",
+    "init:en": "python tools/init.py --lang EN --target ./my-knowledge-vault"
+  },
+  "keywords": [
+    "obsidian",
+    "llm",
+    "wiki",
+    "agent",
+    "knowledge-base",
+    "claude-code",
+    "codex",
+    "gemini"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "CN/",
+    "EN/",
+    "docs/",
+    "tools/",
+    "bin/",
+    "README.md",
+    "README_CN.md",
+    "LICENSE",
+    "VERSION.md",
+    "CHANGELOG.md",
+    "CHANGELOG_CN.md"
+  ]
+}

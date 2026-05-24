@@ -1,0 +1,3 @@
+# rednote
+
+Rednote posts.
