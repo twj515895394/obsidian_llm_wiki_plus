@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Iterable
 
 SKILLS = [
+    "ask",
     "capture",
     "research",
     "integrate",
@@ -21,6 +22,8 @@ SKILLS = [
     "daily-work",
     "decision-record",
     "content-create",
+    "archive",
+    "obsidian-markdown",
 ]
 TOOLS = [".claude", ".gemini", ".codex"]
 ROOT_FILES = [
@@ -34,6 +37,7 @@ ROOT_FILES = [
     "RELEASE_CHECKLIST.md",
     "RELEASE_CHECKLIST_CN.md",
     "package.json",
+    "AGENTS.md",
 ]
 CN_DIRS = [
     "00_收件箱",
@@ -63,9 +67,6 @@ EN_DIRS = [
     "90_Planning",
     "99_System",
 ]
-# Strict markers intentionally use explicit unfinished markers instead of generic
-# words like "placeholder" or "TODO", because release checklists and changelogs
-# may mention those words as part of the validation instructions.
 PLACEHOLDER_MARKERS = [
     "TODO:",
     "TBD:",
@@ -87,7 +88,6 @@ def check_path(path: Path, errors: list[str]) -> None:
 def scan_placeholders(root: Path) -> list[str]:
     hits: list[str] = []
     for path in root.rglob("*.md"):
-        # Skip changelogs where words like TODO may appear in roadmap context? Keep strict for release readiness.
         try:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
