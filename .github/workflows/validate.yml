@@ -1,0 +1,49 @@
+name: Validate
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate repository structure
+        run: python tools/validate-structure.py --strict-placeholders
+
+      - name: Test Python initializer
+        run: |
+          python tools/init.py --lang CN --target /tmp/olwp-cn
+          python tools/init.py --lang EN --target /tmp/olwp-en
+          test -f /tmp/olwp-cn/START_HERE.md
+          test -f /tmp/olwp-en/START_HERE.md
+
+      - name: Test Node CLI initializer
+        run: |
+          node bin/olwp.mjs init --lang CN --target /tmp/olwp-node-cn
+          node bin/olwp.mjs init --lang EN --target /tmp/olwp-node-en
+          test -f /tmp/olwp-node-cn/START_HERE.md
+          test -f /tmp/olwp-node-en/START_HERE.md
+
+      - name: Test migration plan
+        run: |
+          mkdir -p /tmp/old-vault
+          echo '# Old note' > /tmp/old-vault/old-note.md
+          python tools/migrate.py --lang CN --source /tmp/old-vault --target /tmp/olwp-cn
+          ls /tmp/olwp-cn/90_计划/待审核/migration-plan-*.md
+          ls /tmp/olwp-cn/99_系统/日志/migration-manifest-*.csv
