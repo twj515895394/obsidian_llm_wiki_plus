@@ -4,8 +4,9 @@
   "description": "Obsidian + LLM Wiki + Agent Skills bilingual vault template.",
   "type": "module",
   "bin": {
-    "olwp": "bin/olwp.mjs",
-    "obsidian-llm-wiki-plus": "bin/olwp.mjs"
+    "obsidian_llm_wiki_plus": "bin/olwp.mjs",
+    "obsidian-llm-wiki-plus": "bin/olwp.mjs",
+    "olwp": "bin/olwp.mjs"
   },
   "scripts": {
     "validate": "python tools/validate-structure.py --strict-placeholders",
