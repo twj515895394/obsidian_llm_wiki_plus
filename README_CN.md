@@ -1,5 +1,7 @@
 # obsidian_llm_wiki_plus
 
+![系统架构](./CN/Screenshot_cn.png)
+
 [English](./README.md) | **中文**
 
 **Obsidian + LLM Wiki + Agent Skills = 一个可追溯、可复用、可演化的知识操作系统。**

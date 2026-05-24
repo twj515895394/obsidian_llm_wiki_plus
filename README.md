@@ -1,5 +1,7 @@
 # obsidian_llm_wiki_plus
 
+![Architecture](./EN/Screenshot_en.png)
+
 **English** | [中文](./README_CN.md)
 
 **Obsidian + LLM Wiki + Agent Skills = a traceable, reusable, and evolving knowledge operating system.**
