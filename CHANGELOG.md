@@ -1,5 +1,43 @@
 # CHANGELOG
 
+## v1.1
+
+### Added
+
+- Added repository-level `AGENTS.md` for maintaining the template repository itself.
+- Added the `ask` skill for lightweight Q&A without forcing every interaction into capture, research, or integration workflows.
+- Added the `archive` skill for archiving completed projects, processed inbox items, outdated plans, and phase-complete work.
+- Added the `obsidian-markdown` skill for Obsidian Markdown conventions, including frontmatter, wikilinks, callouts, embeds, tags, and attachment references.
+- Added CN / EN command adapters for the new skills under:
+  - `.claude/commands/`
+  - `.gemini/commands/`
+  - `.codex/commands/`
+
+### Improved
+
+- Updated `CN/.agents/index.md` and `EN/.agents/index.md` to include the new v1.1 skills.
+- Updated `CN/AGENTS.md`, `CN/CLAUDE.md`, and `CN/GEMINI.md` with v1.1 skill routing and clearer 40 / 50 / 60 directory boundaries.
+- Updated `EN/AGENTS.md`, `EN/CLAUDE.md`, and `EN/GEMINI.md` with the same v1.1 routing and boundary rules.
+- Absorbed the useful `parse-knowledge` workflow into `integrate` as an unstructured-text parsing mode.
+- Absorbed the useful `start-my-day` workflow into `daily-work` as a start-day / morning planning mode.
+- Clarified that `40_Knowledge_Base` is the core structured llm_wiki knowledge layer.
+- Clarified that `50_Resources` is only for tools, links, cases, prompt templates, and lightweight references.
+- Clarified that `60_Raw_Sources` is the traceable evidence and source archive layer.
+- Updated `tools/validate-structure.py` to validate the new v1.1 skills and repository-level `AGENTS.md`.
+
+### Not included
+
+- Did not add `brainstorm` as a default skill.
+- Did not add AI-newsletter or AI-product intelligence skills into the core template. These may become optional extensions later.
+
+## v1.0
+
+- Added `package.json` and `bin/olwp.mjs` for Node CLI installation.
+- Added `install / init / merge / migrate` command modes.
+- Added `docs/CN/agent-install.md` and `docs/EN/agent-install.md`.
+- Updated README files with one-command install, merge, and migration usage.
+- Installer is conservative by default: no deletion of old files, and non-empty targets require merge/migration choices.
+
 ## v0.9
 
 ### Added
@@ -63,12 +101,3 @@
 ## v0.1
 
 - Initial CN / EN bilingual vault skeleton.
-
-
-## v1.0
-
-- Added `package.json` and `bin/olwp.mjs` for Node CLI installation.
-- Added `install / init / merge / migrate` command modes.
-- Added `docs/CN/agent-install.md` and `docs/EN/agent-install.md`.
-- Updated README files with one-command install, merge, and migration usage.
-- Installer is conservative by default: no deletion of old files, and non-empty targets require merge/migration choices.
