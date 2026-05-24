@@ -10,9 +10,9 @@
 
 `obsidian_llm_wiki_plus` is a bilingual Obsidian Vault template designed for people who want AI agents to help maintain a long-term knowledge system. It functions as a structured "knowledge OS" that sits on top of your existing Obsidian vault, providing the folder structure, metadata standards, and workflow scripts required for AI agents to perform reliable research, synthesis, and maintenance.
 
-It combines raw source capture, deep research, structured wiki integration, project execution, daily review, content creation, and decision records into one agent-friendly Obsidian workflow.
+It combines raw source capture, deep research, structured wiki integration, project execution, daily review, content creation, decision records, and safe vault upgrades into one agent-friendly Obsidian workflow.
 
-You can use the `CN/` or `EN/` vault template directly, or install it into an existing Obsidian Vault with the built-in CLI.
+You can use the `CN/` or `EN/` vault template directly, or install, merge, migrate, and upgrade it with the built-in CLI.
 
 ---
 
@@ -105,6 +105,51 @@ cp -r CN my-vault
 ```
 
 Manual copy is still supported, but the CLI installer is recommended for real use.
+
+---
+
+## Upgrade an existing vault
+
+If you already use an older `obsidian_llm_wiki_plus` vault, use the safe upgrade flow instead of copying the whole template again.
+
+Check health first:
+
+```bash
+npx github:twj515895394/obsidian_llm_wiki_plus doctor --lang EN --target ./my-vault
+```
+
+View differences:
+
+```bash
+npx github:twj515895394/obsidian_llm_wiki_plus diff --lang EN --target ./my-vault
+```
+
+Generate an upgrade plan without modifying files:
+
+```bash
+npx github:twj515895394/obsidian_llm_wiki_plus upgrade --lang EN --target ./my-vault
+```
+
+Apply safe additions after review:
+
+```bash
+npx github:twj515895394/obsidian_llm_wiki_plus upgrade --lang EN --target ./my-vault --apply
+```
+
+Upgrade strategy:
+
+- existing files are not overwritten by default;
+- user files are never deleted;
+- user content is never moved automatically;
+- `--apply` only copies safe missing files such as new skills and command adapters;
+- different entry files, template files, and README files are staged under `.olwp/upgrade-staging/` for manual merge;
+- upgrade plans are written to `90_Planning/review-queue/`;
+- upgrade manifests are written to `99_System/logs/`.
+
+Full command guide:
+
+- [EN/OLWP_COMMANDS.md](./EN/OLWP_COMMANDS.md)
+- [CN/OLWP_COMMANDS.md](./CN/OLWP_COMMANDS.md)
 
 ---
 
@@ -218,6 +263,7 @@ EN/
 ├── CLAUDE.md
 ├── AGENTS.md
 ├── GEMINI.md
+├── OLWP_COMMANDS.md
 ├── 00_Inbox/
 ├── 10_Daily/
 ├── 20_Projects/
@@ -245,6 +291,7 @@ CN/
 ├── CLAUDE.md
 ├── AGENTS.md
 ├── GEMINI.md
+├── OLWP_COMMANDS.md
 ├── 00_收件箱/
 ├── 10_日记/
 ├── 20_项目/
@@ -273,17 +320,20 @@ The main skill source is:
 .agents/skills/
 ```
 
-The first version includes seven core skills:
+The current version includes 10 core skills:
 
 | Skill | Purpose |
 |---|---|
+| `ask` | Quick Q&A, short explanations, lightweight judgments, and simple placement decisions without over-engineering. |
 | `capture` | Capture external links, GitHub repositories, PDFs, local files, web pages, videos, papers, and long-form text. |
 | `research` | Perform deep research on projects, technologies, tools, products, and topics. |
-| `integrate` | Integrate research results, Q&A entries, and project lessons into the structured wiki. |
+| `integrate` | Integrate research results, Q&A entries, project lessons, and unstructured text into the structured wiki. |
 | `kickoff` | Start a new project, system, topic, or long-running initiative. |
-| `daily-work` | Support daily planning, daily logs, and daily reviews. |
+| `daily-work` | Support start-day workflows, daily planning, daily logs, and daily reviews. |
 | `decision-record` | Record technical selections, architecture decisions, product judgments, content strategies, and project roadmap decisions. |
 | `content-create` | Create X posts, newsletters, Rednote posts, video scripts, and content briefs from the knowledge base. |
+| `archive` | Archive completed projects, processed inbox items, outdated plans, and phase-complete materials. |
+| `obsidian-markdown` | Define frontmatter, wikilinks, callouts, embeds, tags, and attachment references for Obsidian Markdown. |
 
 Tool-specific folders are adapters only:
 
@@ -308,8 +358,8 @@ They point to `.agents/skills/` instead of duplicating rules.
 3. **Evolving wiki**  
    Knowledge pages should include metadata such as sources, status, confidence, review dates, and open questions.
 
-4. **Safe migration**  
-   Existing notes are imported into an inbox staging area first. They are not automatically classified as final wiki pages.
+4. **Safe migration and upgrade**  
+   Existing notes are imported into an inbox staging area first. Existing vault upgrades generate plans by default and never overwrite user content automatically.
 
 5. **Agent-friendly execution**  
    Complex operations are routed through short, focused skills rather than one giant instruction file.
@@ -358,19 +408,21 @@ npm run validate
 
 ## Status
 
-Current release target: **v1.0.0**
+Current release target: **v1.2.0**
 
 Included:
 
 - CN / EN vault templates
 - root README files
 - agent entry files
-- seven core skills
+- 10 core skills
 - system rules and templates
 - command adapters for Claude, Gemini, and Codex
 - Python init / migration / validation tools
 - Node CLI installer
 - migration workflow for existing vaults
+- safe upgrade workflow for existing vaults: `doctor / diff / upgrade`
+- CN / EN command guides: `OLWP_COMMANDS.md`
 
 ---
 
