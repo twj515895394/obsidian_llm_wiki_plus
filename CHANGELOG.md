@@ -1,5 +1,31 @@
 # CHANGELOG
 
+## v1.2
+
+### Added
+
+- Added `doctor` command to inspect an existing vault without modifying files.
+- Added `diff` command to compare a vault with the latest template without modifying files.
+- Added `upgrade` command for safe template upgrades.
+- Added `.olwp/state.json` support for tracking installed vault version, language, install time, and last upgrade time.
+- Added `.olwp/upgrade-staging/`, `.olwp/upgrade-plans/`, `.olwp/manifests/`, and `.olwp/backups/` usage for upgrade operations.
+- Added `CN/OLWP_COMMANDS.md` and `EN/OLWP_COMMANDS.md` as user-facing command guides.
+
+### Upgrade strategy
+
+- `upgrade` is plan-only by default and does not modify files unless `--apply` is provided.
+- `upgrade --apply` only copies safe missing files, such as new skills and command adapters.
+- Existing files are never overwritten automatically.
+- Different files are staged into `.olwp/upgrade-staging/` for manual review and merge.
+- Upgrade plans are written to `90_Planning/review-queue/` or `90_计划/待审核/`.
+- Upgrade manifests are written to `99_System/logs/` or `99_系统/日志/`.
+- User content directories are never overwritten automatically.
+
+### Improved
+
+- Updated `bin/olwp.mjs` usage output to include `doctor / diff / upgrade`.
+- Updated `tools/validate-structure.py` to validate `OLWP_COMMANDS.md` in both CN and EN templates.
+
 ## v1.1
 
 ### Added
